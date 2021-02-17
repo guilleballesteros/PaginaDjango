@@ -1,0 +1,46 @@
+{% extends 'nucleo/layouts/layout.html' %} {% block content %}
+
+
+<div class="card card-default">
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th scope="col">Client</th>
+          <th scope="col">Application date</th>
+          <th scope="col">reason</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reparacion in reparaciones_list %}
+        <tr>
+          <th>{{reparacion.client.name}}</th>
+          <th>{{reparacion.dateR}}</th>
+          <th>{{reparacion.reason}}</th>
+          <th>
+            <a href="{% url 'repairCar' pk=reparacion.id %}">
+              <button type="button" class="btn btn-success btn-xs">
+                <i class="fas fa-tools"></i>
+              </button>
+            </a>
+          </th>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+          <th scope="col">Client</th>
+          <th scope="col">Application date</th>
+          <th scope="col">reason</th>
+          <th scope="col">Actions</th>
+          
+      </tfoot>
+    </table>
+    
+  </div>
+  <!-- /.card-body -->
+</div>
+
+
+{% endblock content %}

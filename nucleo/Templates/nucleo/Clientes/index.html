@@ -1,0 +1,59 @@
+{% extends 'nucleo/layouts/layout.html' %} {% block content %}
+
+
+<div class="card card-default">
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th scope="col">DNI</th>
+          <th scope="col">Name</th>
+          <th scope="col">Lastname</th>
+          <th scope="col">Address</th>
+          <th scope="col">Telephone number</th>
+          <th scope="col">Date of birth</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cliente in clientes_list %}
+        <tr>
+          <th>{{cliente.DNI}}</th>
+          <th>{{cliente.name}}</th>
+          <th>{{cliente.lastName}}</th>
+          <th>{{cliente.address}}</th>
+          <th>{{cliente.tel}}</th>
+          <th>{{cliente.date}}</th>
+          <th>
+            <a href="{% url 'carsClient' cliente.pk %}">
+              <button type="button" class="btn btn-success btn-xs">
+                <i class="fas fa-tools"></i>
+              </button>
+            </a>
+            <a href="{% url 'pdf' cliente.pk %}">
+                <button type="button" class="btn btn-info btn-xs">
+                  <i class="far fa-file-pdf"></i>
+                </button>
+            </a> 
+          </th>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <th scope="col">DNI</th>
+          <th scope="col">Name</th>
+          <th scope="col">Lastname</th>
+          <th scope="col">Address</th>
+          <th scope="col">Telephone number</th>
+          <th scope="col">Date of birth</th>
+          <th scope="col">Actions</th>
+      </tfoot>
+    </table>
+     
+  </div>
+  <!-- /.card-body -->
+</div>
+
+
+{% endblock content %}

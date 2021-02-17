@@ -1,0 +1,37 @@
+{% extends 'nucleo/layouts/layout.html' %} 
+{% block content %}
+
+
+  <div class="card card-default">
+    <div class="card-body">
+      <form method="POST" action="" role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row">
+          <label for="brand">Title: </label>
+          {{form.title}}
+          <label for="text">Text: </label>
+          {{form.text}}
+          <div class="form-group">
+            <div class="form-control">
+              <label for="photo">Image: </label>
+              {{form.photo}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card-footer">
+            <a href="{% url 'listNews' %}">
+              <button type="button" class="btn btn-outline-danger">
+                <i class="fas fa-arrow-circle-left"></i>Back
+              </button>
+            </a>
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+
+{% extends 'nucleo/layouts/layout.html' %}
+
+{% block content %}
+    <div class="row">
+        {% for noticia in noticias %}
+            <div class="card m-5" style="width: 44rem;">
+                <img class="card-img-top" src="{{noticia.photo.url}}" alt="Card image cap">
+                <div class="card-header">
+                    <h4 class="card-title">{{noticia.title}}</h4>
+                    
+                </div>
+                <div class="card-body">
+                    
+                    <p class="card-text">{{noticia.text}}</p>
+                </div>
+                <div class="card-footer">
+                    <h6 class="card-subtitle mb-2 text-muted">{{noticia.dateC}} {{noticia.mechanic.name}}</h6>
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
+
+{% endblock content %}
+
+

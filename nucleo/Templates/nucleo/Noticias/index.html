@@ -1,0 +1,57 @@
+{% extends 'nucleo/layouts/layout.html' %} {% block content %}
+
+
+<div class="card card-default">
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th scope="col">title</th>
+            <th scope="col">text</th>
+            <th scope="col">photo</th>
+            <th scope="col">Mechanic</th>
+            <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for noticia in noticias_list %}
+        <tr>
+          <th>{{noticia.title}}</th>
+          <th>{{noticia.text}}</th>
+          <th>{{noticia.photo}}</th>
+          <th>{{noticia.mechanic.name}}</th>
+          <th>
+            <a href="{% url 'updateNew' pk=noticia.id %}">
+              <button type="button" class="btn btn-info btn-xs">
+                <i class="fa fa-edit"></i>
+              </button>
+            </a>
+            <a href="{% url 'deleteNew' pk=noticia.id %}">
+              <button type="button" class="btn btn-danger btn-xs">
+                <i class="fas fa-trash"></i>
+              </button>
+            </a>
+          </th>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <th scope="col">title</th>
+        <th scope="col">text</th>
+        <th scope="col">photo</th>
+        <th scope="col">Mechanic</th>
+        <th scope="col">Actions</th>
+      </tfoot>
+    </table>
+    <div class="card-footer">
+      <a href="{% url 'createNew' %}" class="btn btn-primary"
+        ><i class="fas fa-plus"></i> Add a new</a
+      >
+    </div>
+  </div>
+  <!-- /.card-body --> 
+</div>
+
+
+{% endblock content %}
