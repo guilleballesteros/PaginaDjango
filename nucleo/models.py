@@ -11,7 +11,6 @@ import os
 class UserNucleo(AbstractUser):
     is_client = models.BooleanField('Estado de cliente', default=False)
     is_mechanic = models.BooleanField('Estado de mecanico', default=False)
-    is_active = models.BooleanField('Activo', default=False)
 
 
     class Meta:

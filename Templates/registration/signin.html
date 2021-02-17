@@ -1,0 +1,25 @@
+{% extends 'nucleo/layouts/layout.html' %}
+
+{% block content %}
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <form action="" method="post">
+            {% csrf_token %}
+            <h3 class="mb-4">Te lo arreglo Sign In</h3>
+            {{form.as_p}}
+            <input
+              type="submit"
+              class="btn btn-primary btn-block"
+              value="Sign In"
+            />
+          </form>
+          
+          <footer>
+            <a class="btn btn-danger" href="{% url 'index' %}">Back</a>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}

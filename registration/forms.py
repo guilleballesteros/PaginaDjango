@@ -26,6 +26,7 @@ class UserCreationFormClient(UserCreationForm):
     def save(self, commit=True):
         user=super().save(commit=False)
         user.is_client = True
+        user.us_active = False
         user.save()
         dni=self.cleaned_data['DNI']
         name=self.cleaned_data['name']

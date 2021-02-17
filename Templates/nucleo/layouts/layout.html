@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Te lo arreglo homepage</title>
+
+  <!--DataTables-->
+  <link rel="stylesheet" href="{% static 'datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
+  <link rel="stylesheet" href="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/css/responsive.bootstrap4.min.css' %}"/>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/scrolling-nav.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'vendor/bootstrap/adminlte.min.css' %}">
+    
+</head>
+
+<body id="page-top" class="hold-transition sidebar-mini sidebar-collapse">
+  <div class="wrapper">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i>
+        </a>
+      </li>
+    </ul>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          {% if not request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'login' %}">Log In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="{% url 'SignIn' %}">Sign In</a>
+            </li>
+          {% else %}
+            <li class="dropdown nav-item">
+            <i class="fas fa-user"></i>
+              {% if request.user.is_client %}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ user.cliente.name }} <span class="caret"></span>
+                </a>
+              {% elif request.user.is_mechanic%}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ user.mecanico.name }} <span class="caret"></span>
+                </a>
+              {% else %}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    {{ user.username }} <span class="caret"></span>
+                </a>
+              {% endif %}
+              <ul class="dropdown-menu" role="menu">
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>   
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+    {% if request.user.is_authenticated %}
+    
+   <aside class="main-sidebar sidebar-dark-primary elevation-4">
+   <a href="{% url 'index' %}" class="brand-link">
+      <img src="{% static 'img/logo.png' %}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">Te Lo Arreglo</span>
+    </a>
+    <div class="sidebar">
+      <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+            {% if request.user.is_client %}
+            <li class="nav-item">
+              <a href="{% url 'listCar' %}" class="nav-link">
+                
+                <i class="fas fa-car"></i>
+                <p>
+                  View cars
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{% url 'listRepairsC' %}" class="nav-link">
+                
+                <i class="fas fa-tools"></i>
+                <p>
+                  View repairs dones
+                </p>
+              </a>
+            </li>
+
+            {% elif request.user.is_mechanic%}
+            <li class="nav-item">
+              <a href="{% url 'listClients' %}" class="nav-link">
+                
+                <i class="fas fa-user"></i>
+                <p>
+                  View clients
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'listRepairs' %}" class="nav-link">
+                
+                <i class="fas fa-tools"></i>
+                <p>
+                  View pending repairs
+                </p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="{% url 'listNews' %}" class="nav-link">
+                
+               <i class="far fa-newspaper"></i>
+                <p>
+                  View news
+                </p>
+              </a>
+            </li>
+            {% endif %}
+          
+          </ul>
+        </nav>
+    </div>
+   </aside>
+    {% endif %}
+  <div class="content-wrapper">
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+   <section class="content">
+      <header class="bg-info text-white">
+        <div class="container text-center">
+          <h2><i class="{{icon}}"></i> {{title}}</h2>
+        </div>
+      </header>
+      {% block content %}
+  
+
+      {% endblock content %}
+   </section>
+    <!-- /.content -->
+  </div>
+
+  
+</div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+  <!-- AdminLTE App -->
+<script src="{% static 'js/adminlte.min.js' %}"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  
+</body>
+<!--Scripts-->
+  <script src="{% static 'js/scrolling-nav.js' %}"></script>
+  <script src="{% static 'datatables-1.10.20/js/jquery.dataTables.js' %}"></script>
+  <script src="{% static 'datatables-1.10.20/js/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/dataTables.responsive.min.js' %}"></script>
+  <script src="{% static 'datatables-1.10.20/plugins/responsive-2.2.3/js/responsive.bootstrap4.min.js' %}"></script>
+  
+  <script type="application/javascript">
+        $(function () {
+            $('#table').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
+        });
+  </script>
+</html>

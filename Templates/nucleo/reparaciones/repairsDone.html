@@ -1,0 +1,56 @@
+{% extends 'nucleo/layouts/layout.html' %} {% block content %}
+
+<div class="card card-default">
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+        {% if request.user.is_client %}
+          <th scope="col">Car</th>
+        {% endif %}
+          <th scope="col">Application date</th>
+          <th scope="col">Fixed date</th>
+          <th scope="col">reason</th>
+          <th scope="col">Observations</th>
+          <th scope="col">Fixed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reparacion in reparaciones %}
+        <tr>
+          {% if request.user.is_client %}
+            <th>{{reparacion.car.brand}} {{reparacion.car.model}}</th>
+          {% endif %}
+          <th>{{reparacion.dateR}}</th>
+          <th>{{reparacion.dateA}}</th>
+          <th>{{reparacion.reason}}</th>
+          <th>{{reparacion.observations}}</th>
+          <th><i class="fas fa-check"></i></th>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        {% if request.user.is_client %}
+          <th scope="col">Car</th>
+        {% endif %}
+          <th scope="col">Application date</th>
+          <th scope="col">Fixed date</th>
+          <th scope="col">reason</th>
+          <th scope="col">Observations</th>
+          <th scope="col">Fixed</th>
+      </tfoot>
+    </table>
+    {% if request.user.is_mechanic %}
+      <div class="card-footer">
+        <a href="{% url 'createCar' %}" class="btn btn-primary"
+          ><i class="fas fa-file-pdf"></i> Create PDF</a
+        >
+      </div>
+    {% endif %}
+  </div>
+  <!-- /.card-body -->
+</div>
+
+
+{% endblock content %}

@@ -1,0 +1,81 @@
+{% extends 'nucleo/layouts/layout.html' %} {% block content %}
+
+<div class="card card-default">
+  <!-- /.card-header -->
+  <div class="card-body">
+    <table class="table table-bordered" id="table">
+      <thead>
+        <tr>
+          <th scope="col">Brand</th>
+          <th scope="col">Model</th>
+          <th scope="col">Colour</th>
+          <th scope="col">Date of registration</th>
+          <th scope="col">Image</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in coches_list %}
+        <tr>
+          <th>{{car.brand}}</th>
+          <th>{{car.model}}</th>
+          <th>{{car.colour}}</th>
+          <th>{{car.dateM}}</th>
+          <th>
+            <img
+              src="{{car.image.url}}"
+              class="img-response center-block"
+              alt="Image"
+              style="height: 100px; width: 100px"
+            />
+          </th>
+          <th>
+          {% if request.user.is_client %}
+            <a href="{% url 'updateCar' pk=car.id %}">
+              <button type="button" class="btn btn-info btn-xs">
+                <i class="fa fa-edit"></i>
+              </button>
+            </a>
+            <a href="{% url 'deleteCar' pk=car.id %}">
+              <button type="button" class="btn btn-danger btn-xs">
+                <i class="fas fa-trash"></i>
+              </button>
+            </a>
+            <a href="{% url 'ArepairCar' coche_id=car.id %}">
+              <button type="button" class="btn btn-success btn-xs">
+                <i class="fas fa-tools"></i>
+              </button>
+            </a>
+            {% elif request.user.is_mechanic %}
+            <a href="{% url 'carRepairs' coche_id=car.id %}">
+              <button type="button" class="btn btn-success btn-xs">
+                <i class="fas fa-tools"></i>
+              </button>
+            </a>
+            {% endif %}
+          
+
+          </th>
+        </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <th scope="col">Brand</th>
+        <th scope="col">Model</th>
+        <th scope="col">Colour</th>
+        <th scope="col">Date of registration</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+      </tfoot>
+    </table>
+    <div class="card-footer">
+      <a href="{% url 'createCar' %}" class="btn btn-primary"
+        ><i class="fas fa-plus"></i> Add a new car</a
+      >
+    </div>
+  </div>
+  <!-- /.card-body -->
+</div>
+
+
+{% endblock content %}

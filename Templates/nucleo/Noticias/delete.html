@@ -1,0 +1,28 @@
+{% extends 'nucleo/layouts/layout.html' %}
+
+{% block content %}
+
+<div class="card card-default">
+  <!-- /.card-header -->
+  <div class="card-body">
+		<div class="alert alert-danger alert-dismissible">
+			<form method="post">{% csrf_token %}
+				<h5><i class="icon fas fa-ban"></i> Confirm</h5>
+				Are you sure that you want to delete this car?
+				<div class="row">
+
+					<div class="card-footer">
+						<a href="{% url 'listNews' %}" >
+						<button type="button" class="btn btn-info">Cancel</button>
+						</a>
+						<input type="submit"  value="Confirm" class="btn btn-primary">	
+					</div>	
+
+				</div>
+			</form>
+		</div>
+
+  </div>
+</div>
+
+{% endblock content %}
